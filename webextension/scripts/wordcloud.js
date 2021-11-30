@@ -29,11 +29,9 @@ function getTags() {
 
   let new_url = hostURL + 'services/context/tagcloud?url=' + toBeUsedAsURL
   $('#loader_tagcloud').show()
-  let headers = new Headers(hostHeaders)
-  headers.set('backend', 'nomad')
   fetch(new_url, {
     method: 'GET',
-    headers: headers
+    headers: hostHeaders
   })
     .then(response => response.json())
     .then((data) => {

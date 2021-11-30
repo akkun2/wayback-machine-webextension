@@ -420,11 +420,9 @@ function setupReadBook() {
                 })
               } else {
                 // if not, fetch it again
-                let headers = new Headers(hostHeaders)
-                headers.set('backend', 'nomad')
                 fetch(hostURL + 'services/context/amazonbooks?url=' + url, {
                   method: 'GET',
-                  headers: headers
+                  headers: hostHeaders
                 })
                 .then(res => res.json())
                 .then(response => {

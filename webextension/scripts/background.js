@@ -242,7 +242,6 @@ function fetchAPI(url, onSuccess, onFail, postData = null) {
   const timeoutPromise = new Promise((resolve, reject) => {
     setTimeout(() => { reject(new Error('timeout')) }, API_TIMEOUT)
     let headers = new Headers(hostHeaders)
-    headers.set('backend', 'nomad')
     headers.set('Content-Type', 'application/json')
     fetch(url, {
       method: (postData) ? 'POST' : 'GET',
@@ -625,11 +624,9 @@ chrome.tabs.onUpdated.addListener((tabId, info, tab) => {
           const url = getCleanUrl(tab.url)
           // checking resource of amazon books
           if (url.includes('www.amazon')) {
-            let headers = new Headers(hostHeaders)
-            headers.set('backend', 'nomad')
             fetch(hostURL + 'services/context/amazonbooks?url=' + url, {
               method: 'GET',
-              headers: headers
+              headers: hostHeaders
             })
             .then(resp => resp.json())
             .then(resp => {
